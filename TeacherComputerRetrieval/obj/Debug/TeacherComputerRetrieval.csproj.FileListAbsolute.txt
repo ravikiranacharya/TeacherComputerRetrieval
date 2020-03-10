@@ -1,0 +1,7 @@
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\bin\Debug\TeacherComputerRetrieval.exe.config
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\bin\Debug\TeacherComputerRetrieval.exe
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\bin\Debug\TeacherComputerRetrieval.pdb
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\obj\Debug\TeacherComputerRetrieval.csprojAssemblyReference.cache
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\obj\Debug\TeacherComputerRetrieval.csproj.CoreCompileInputs.cache
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\obj\Debug\TeacherComputerRetrieval.exe
+C:\Users\RaviKiran\source\repos\TeacherComputerRetrieval\TeacherComputerRetrieval\obj\Debug\TeacherComputerRetrieval.pdb
