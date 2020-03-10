@@ -22,6 +22,21 @@ namespace TeacherComputerRetrieval
             routes.Add(new Route("E", "B", 3));
             routes.Add(new Route("A", "E", 7));
 
+            Journey journey1 = new Journey(routes);
+            Journey journey2 = new Journey(routes);
+            Journey journey3 = new Journey(routes);
+
+            journey1.Stops.AddRange(new List<String>() { "A", "B", "C" });
+            journey2.Stops.AddRange(new List<String>() { "A", "E", "B", "C", "D" });
+            journey3.Stops.AddRange(new List<String>() { "A", "E", "D" });
+
+            journey1.CalculateDistance();
+            journey2.CalculateDistance();
+            journey3.CalculateDistance();
+
+
+
+
             Console.WriteLine("Hello world");
         }
     }
