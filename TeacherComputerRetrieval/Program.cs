@@ -11,6 +11,9 @@ namespace TeacherComputerRetrieval
     {
         static void Main(string[] args)
         {
+            //Read input from user
+
+            //Initialize Region Object
             var region = new Region();
 
             region.AddCity("A");
@@ -41,10 +44,16 @@ namespace TeacherComputerRetrieval
             Console.WriteLine("{0}", distance2 == 0 ? "NO SUCH ROUTE" : distance2.ToString());
             Console.WriteLine("{0}", distance3 == 0 ? "NO SUCH ROUTE" : distance3.ToString());
 
-            var routes = region.GetAllRoutes("C", "C");
+            var routes = region.GetAllRoutes("A", "C");
 
 
             Console.WriteLine("Hello world");
         }
+
+        static string ReadInput()
+        {
+            return null;
+        }
+
     }
 }

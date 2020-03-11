@@ -55,6 +55,7 @@ namespace TeacherComputerRetrieval
 
 
         private Dictionary<string, City> cities = new Dictionary<string, City>();
+        public List<List<City>> routes;
 
         public void AddCity(string name)
         {
@@ -79,22 +80,10 @@ namespace TeacherComputerRetrieval
             }
 
             startingCity.AddRoute(endingCity, distance);
-
+            
         }
 
-        public void Print()
-        {
-            foreach (var city in cities.Values)
-            {
-                var routes = city.GetRoutes();
-                if (routes.Count > 0)
-                {
-                    Console.WriteLine(city + " is connected to: " + String.Join(",", routes));
-                }
-            }
-        }
 
-        public List<List<City>> routes;
         public List<List<City>> GetAllRoutes(string startingPoint, string endingPoint)
         {
             this.routes = new List<List<City>>();
@@ -118,13 +107,26 @@ namespace TeacherComputerRetrieval
 
         private void GetAllRoutes(City startingCity, City endingCity, Dictionary<City, bool> visitedCities, List<City> localPathList)
         {
-            //visitedCities[startingCity] = true;
+            visitedCities[startingCity] = true;
+
             if (startingCity.ToString() == endingCity.ToString())
             {
                 Console.WriteLine(string.Join(",", localPathList));
+
                 this.routes.Add(new List<City>(localPathList));
+                var allVisited = true;
+                foreach (var city in visitedCities)
+                {
+                    if (city.Value == false)
+                    {
+                        allVisited = false;
+                    }
+                }
+                if (allVisited)
+                {
+                    return;
+                }
                 visitedCities[startingCity] = false;
-                return;
             }
 
             foreach (var route in startingCity.GetRoutes())
