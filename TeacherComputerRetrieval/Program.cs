@@ -3,34 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using static TeacherComputerRetrieval.Region;
+using System.Configuration;
 
 namespace TeacherComputerRetrieval
 {
     class Program
     {
+        /* Program execution starts here */
         static void Main(string[] args)
         {
-            //Read input from user
-
             //Initialize Region Object
             var region = new Region();
+            
+            //Read input from user
+            string input = ReadInput();
+            
+            //Get all cities from input and add the distinct cities to the region
+            string distinct = new String(input.Distinct().ToArray());
+            foreach (var city in distinct)
+            {
+                if (char.IsLetter(city)) //Check if the character is a letter. We don't want to add cities for numeric characters
+                {
+                    region.AddCity(city.ToString()); 
+                }
+            }
 
-            region.AddCity("A");
-            region.AddCity("B");
-            region.AddCity("C");
-            region.AddCity("D");
-            region.AddCity("E");
+            //For each line, add a route between the two cities with the distance
+            foreach(var line in input.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                if (!(String.IsNullOrWhiteSpace(line)))
+                {
+                    //Assuming the first char from input is starting city, second char is ending city and the rest characters denote the distance between the two cities
+                    region.AddRoute(line[0].ToString(), line[1].ToString(), Convert.ToInt32(line.Substring(2, line.Length - 2)));
+                }
+            }
 
-            region.AddRoute("A", "B", 5);
-            region.AddRoute("B", "C", 4);
-            region.AddRoute("C", "D", 8);
-            region.AddRoute("D", "C", 8);
-            region.AddRoute("D", "E", 6);
-            region.AddRoute("A", "D", 5);
-            region.AddRoute("C", "E", 2);
-            region.AddRoute("E", "B", 3);
-            region.AddRoute("A", "E", 7);
 
             List<City> trip1 = new List<City>() { new City("A"), new City("B"), new City("C") };
             List<City> trip2 = new List<City>() { new City("A"), new City("E"), new City("B"), new City("C"), new City("D") };
@@ -52,7 +61,7 @@ namespace TeacherComputerRetrieval
 
         static string ReadInput()
         {
-            return null;
+            return File.ReadAllText(ConfigurationManager.AppSettings["InputFilePath"]);
         }
 
     }
