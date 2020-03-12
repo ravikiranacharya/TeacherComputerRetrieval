@@ -16,6 +16,7 @@ namespace TeacherComputerRetrieval
         {
 
         }
+
         [TestCase]
         public void DistanceOfRoute()
         {
@@ -36,9 +37,28 @@ namespace TeacherComputerRetrieval
             region.AddRoute("E", "B", 3);
             region.AddRoute("A", "E", 7);
 
+            /* Expected answers for given questions */
             Assert.AreEqual(9, region.GetDistance(new List<City>() { new City("A"), new City("B"), new City("C") }));
             Assert.AreEqual(22, region.GetDistance(new List<City>() { new City("A"), new City("E"), new City("B"), new City("C"), new City("D") }));
             Assert.AreNotEqual(7, region.GetDistance(new List<City>() { new City("A"), new City("E"), new City("D") }));
+            Assert.AreEqual(2, region.CountTrips("C", "C", count => count <=3));
+            Assert.AreEqual(3, region.CountTrips("A", "C", count => count ==4));
+            Assert.AreEqual(22, region.GetDistance(new List<City>() { new City("A"), new City("E"), new City("B"), new City("C"), new City("D") }));
+            Assert.AreEqual(9, region.GetShortestDistance("A", "C"));
+            Assert.AreEqual(9, region.GetShortestDistance("B", "B"));
+
+            /* More test cases */
+
+            //Route of AEB = 10
+            //Route of BCDC = 20
+            //Shortest route from C to A - NO SUCH ROUTE
+            //Shortest route from C to E - 2
+
+            Assert.AreEqual(10, region.GetDistance(new List<City>() { new City("A"), new City("E"), new City("B") }));
+            Assert.AreEqual(20, region.GetDistance(new List<City>() { new City("B"), new City("C"), new City("D"), new City("C") }));
+            Assert.AreEqual(0, region.GetShortestDistance("C", "A"));
+            Assert.AreEqual(2, region.GetShortestDistance("C", "E"));
+
 
         }
     }

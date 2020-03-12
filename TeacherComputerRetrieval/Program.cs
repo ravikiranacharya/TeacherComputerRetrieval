@@ -16,22 +16,22 @@ namespace TeacherComputerRetrieval
         {
             //Initialize Region Object
             var region = new Region();
-            
+
             //Read input from user
             string input = ReadInput();
-            
+
             //Get all cities from input and add the distinct cities to the region
             string distinct = new String(input.Distinct().ToArray());
             foreach (var city in distinct)
             {
                 if (char.IsLetter(city)) //Check if the character is a letter. We don't want to add cities for numeric characters
                 {
-                    region.AddCity(city.ToString()); 
+                    region.AddCity(city.ToString());
                 }
             }
 
             //For each line, add a route between the two cities with the distance
-            foreach(var line in input.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var line in input.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
             {
                 if (!(String.IsNullOrWhiteSpace(line)))
                 {
@@ -41,27 +41,46 @@ namespace TeacherComputerRetrieval
             }
 
 
-            List<City> trip1 = new List<City>() { new City("A"), new City("B"), new City("C") };
-            List<City> trip2 = new List<City>() { new City("A"), new City("E"), new City("B"), new City("C"), new City("D") };
-            List<City> trip3 = new List<City>() { new City("A"), new City("E"), new City("D") };
+            /* Print answers for all the eight questions */
+            List<City> firstTrip = new List<City>() { new City("A"), new City("B"), new City("C") };
+            List<City> secondTrip = new List<City>() { new City("A"), new City("E"), new City("B"), new City("C"), new City("D") };
+            List<City> thirdTrip = new List<City>() { new City("A"), new City("E"), new City("D") };
 
-            var distance1 = region.GetDistance(trip1);
-            var distance2 = region.GetDistance(trip2);
-            var distance3 = region.GetDistance(trip3);
-
-            Console.WriteLine("{0}", distance1 == 0 ? "NO SUCH ROUTE" : distance1.ToString());
-            Console.WriteLine("{0}", distance2 == 0 ? "NO SUCH ROUTE" : distance2.ToString());
-            Console.WriteLine("{0}", distance3 == 0 ? "NO SUCH ROUTE" : distance3.ToString());
-
+            var distanceOfFirstTrip = region.GetDistance(firstTrip);
+            var distanceOfSecondTrip = region.GetDistance(secondTrip);
+            var distanceOfThirdTrip = region.GetDistance(thirdTrip);
             var routes = region.GetAllRoutes("A", "C");
+            var shortestRouteFromAtoC = region.GetShortestDistance("A", "C");
+            var shortestRouteFromBtoB = region.GetShortestDistance("B", "B");
 
+            PrintDistance(distanceOfFirstTrip);
+            PrintDistance(distanceOfSecondTrip);
+            PrintDistance(distanceOfThirdTrip);
+            var tripsFromCtoC = region.CountTrips("C", "C", count => count <= 3);
+            var tripsFromAtoC = region.CountTrips("A", "C", count => count == 4);
+            PrintDistance(shortestRouteFromAtoC);
+            PrintDistance(shortestRouteFromBtoB);
+            Console.WriteLine("8. Not implemented");
 
-            Console.WriteLine("Hello world");
+            /* Formally exit */
+            Console.WriteLine("Press any key to exit");
+            var exit = Console.ReadKey();
         }
 
+        /* Method to read input from text file */
+        /* Assumption : Text file exists in the specified path */
         static string ReadInput()
         {
             return File.ReadAllText(ConfigurationManager.AppSettings["InputFilePath"]);
+        }
+
+        /// <summary>
+        /// Helper method to print distance
+        /// </summary>
+        /// <param name="distance">Distance</param>
+        static void PrintDistance(int distance)
+        {
+            Console.WriteLine("{0}", distance == 0 ? "NO SUCH ROUTE" : distance.ToString());
         }
 
     }
