@@ -40,6 +40,7 @@ namespace TeacherComputerRetrieval
                 }
             }
 
+            
 
             /* Print answers for all the eight questions */
             List<City> firstTrip = new List<City>() { new City("A"), new City("B"), new City("C") };
@@ -60,10 +61,12 @@ namespace TeacherComputerRetrieval
             var tripsFromAtoC = region.CountTrips("A", "C", count => count == 4);
             PrintDistance(shortestRouteFromAtoC);
             PrintDistance(shortestRouteFromBtoB);
-            Console.WriteLine("8. Not implemented");
+            var tripsFromCtoCWithin30 = region.CountTrips("C", "C", distance => distance < 30);
 
             /* Formally exit */
+            Console.WriteLine("---------------------");
             Console.WriteLine("Press any key to exit");
+            Console.WriteLine("---------------------");
             var exit = Console.ReadKey();
         }
 

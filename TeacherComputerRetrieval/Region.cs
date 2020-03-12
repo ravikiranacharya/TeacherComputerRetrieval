@@ -80,7 +80,7 @@ namespace TeacherComputerRetrieval
 
         // Dictionary to store cities as key value pairs
         private Dictionary<string, City> cities = new Dictionary<string, City>();
-        public List<List<City>> routes; // To store all routes between source and destination
+        private List<List<City>> routes; // To store all routes between source and destination
 
         /// <summary>
         /// To add a city by name
